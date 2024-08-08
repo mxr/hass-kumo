@@ -9,7 +9,10 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
 from homeassistant.core import HomeAssistant
 from homeassistant.util.json import load_json
-from homeassistant.helpers.json import save_json
+try:
+    from homeassistant.util.json import save_json # < version 2024.8
+except ImportError:
+    from homeassistant.helpers.json import save_json # >= version 2024.8
 
 from .coordinator import KumoDataUpdateCoordinator
 from .const import (
