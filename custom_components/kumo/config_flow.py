@@ -5,9 +5,13 @@ import voluptuous as vol
 from homeassistant import config_entries, core, exceptions
 from homeassistant.core import callback
 from homeassistant.util.json import load_json
-from homeassistant.helpers.json import save_json
 from pykumo import KumoCloudAccount
 from requests.exceptions import ConnectionError
+
+try:
+    from homeassistant.util.json import save_json # < version 2024.8
+except ImportError:
+    from homeassistant.helpers.json import save_json # >= version 2024.8
 
 from .const import DOMAIN, KUMO_CONFIG_CACHE
 
